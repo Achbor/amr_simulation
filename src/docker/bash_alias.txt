@@ -1,0 +1,7 @@
+# Aliases to cut down long terminal commands
+alias build='cd ~/ros2/ros2_robot && colcon build --symlink-install && source ~/.bashrc'
+alias cleanup='echo "cleaning Up..." && sleep 5.0 && \
+pkill -g -f "ros2|gazebo|gz|nav2|amcl|bt_navigator|nav_to_pose|rviz2|cmd_vel_relay|robot_state_publisher|\
+joint_state_publisher|move_to_free|mqtt"'
+alias robot_launch='ros2 launch my_robot launch_robot.launch.py'
+alias control_launch='ros2 launch my_robot joystick.launch.py'

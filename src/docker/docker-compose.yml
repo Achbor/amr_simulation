@@ -1,0 +1,84 @@
+version: '3.8'
+# services:
+#   manipulation: &manipulation
+#     container_name: amr_robot
+#     image: manipulation:latest
+#     # runtime: nvidia
+#     gpus: all
+#     stdin_open: true
+#     tty: true
+#     ipc: host
+#     network_mode: host
+#     privileged: true
+#     environment:
+#       - DISPLAY=${DISPLAY}
+#       - XAUTHORITY=/tmp/.Xauthority
+#       - QT_X11_NO_MITSHM=1
+#       - NVIDIA_VISIBLE_DEVICES=all
+#       - NVIDIA_DRIVER_CAPABILITIES=all
+#     volumes:
+#       - $HOME/achy/shared/ros2:/root/shared/ros2
+#       - $HOME/.Xauthority:/tmp/.Xauthority
+#       - /tmp/.X11-unix:/tmp/.X11-unix:rw
+#       - /dev:/dev
+#     # deploy:
+#     #   resources:
+#     #     reservations:
+#     #       devices:
+#     #         - driver: nvidia
+#     #           count: all
+#     #           capabilities: [gpu, compute, video]
+#     command: ["tail", "-f", "/dev/null"]
+#   micro_ros_agent:
+#     image: microros/micro-ros-agent:humble
+#     container_name: uros_agent
+#     restart: always
+#     network_mode: host
+#     privileged: true
+#     volumes:
+#       - /dev:/dev
+#     # command: udp4 --port 8888
+#     command: serial --dev /dev/serial/by-id/usb-1a86_USB_Single_Serial_5971081778-if00 -b 115200
+
+    
+services:
+  manipulation:
+    container_name: amr_robot
+    image: manipulation:latest
+    gpus: all
+    stdin_open: true
+    tty: true
+    ipc: host
+    network_mode: host
+    privileged: true
+
+    environment:
+      - DISPLAY=${DISPLAY}
+      - XAUTHORITY=/tmp/.Xauthority
+      - QT_X11_NO_MITSHM=1
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+
+    volumes:
+      - $HOME/achy/shared/ros2:/root/shared/ros2
+      - $HOME/.Xauthority:/tmp/.Xauthority
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /dev:/dev
+
+    command: ["tail", "-f", "/dev/null"]
+
+  micro_ros_agent:
+    image: microros/micro-ros-agent:humble
+    container_name: uros_agent
+    restart: always
+    network_mode: host
+    privileged: true
+
+    volumes:
+      - /dev:/dev
+
+    command: serial --dev /dev/serial/by-id/usb-1a86_USB_Single_Serial_5971081778-if00 -b 115200
+  
+
+    
+      
