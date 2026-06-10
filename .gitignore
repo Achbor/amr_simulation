@@ -1,0 +1,24 @@
+# ROS2 build outputs
+build/
+install/
+log/
+
+# Maps and SLAM outputs
+*.pgm
+*.yaml
+*.data
+*.posegraph
+
+# Graphviz outputs
+*.gv
+*.pdf
+
+# Specific file
+src/my_robot/launch/launch_robot.launch.py
+
+# Python
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode
